@@ -8,6 +8,7 @@ on:
     branches: [ master, develop ]
   pull_request:
     branches: [ master, develop ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,7 +28,7 @@ jobs:
     - run: npm run build --if-present
     # - run: npm test
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: app-build
         path: main.js
@@ -37,3 +38,6 @@ jobs:
         prerelease: false
         tag_name: develop
         target_commitish: ${{ github.sha }}
+
+permissions:
+  contents: write
